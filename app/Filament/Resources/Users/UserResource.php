@@ -22,7 +22,7 @@ class UserResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return true;
+        return auth()->user()?->isAdmin() ?? false;
     }
 
     public static function table(Table $table): Table
@@ -36,4 +36,5 @@ class UserResource extends Resource
             'index' => \App\Filament\Resources\Users\Pages\ManageUsers::route('/'),
         ];
     }
+    
 }

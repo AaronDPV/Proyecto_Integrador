@@ -47,4 +47,9 @@ class ProductoResource extends Resource
             'index' => ListProductos::route('/'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->isInventory() ?? false;
+    }
 }

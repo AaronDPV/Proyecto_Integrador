@@ -28,4 +28,9 @@ class PurchaseResource extends Resource
             'index' => ManagePurchases::route('/'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->isPurchaser() ?? false;
+    }
 }
