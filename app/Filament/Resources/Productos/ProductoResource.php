@@ -18,7 +18,11 @@ class ProductoResource extends Resource
 {
     protected static ?string $model = Producto::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationLabel = 'Inventario';
+    protected static ?string $pluralModelLabel = 'Inventario';
+    protected static ?string $modelLabel = 'Inventario';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-cube';
+
 
     public static function form(Schema $schema): Schema
     {
@@ -41,8 +45,6 @@ class ProductoResource extends Resource
     {
         return [
             'index' => ListProductos::route('/'),
-            'create' => CreateProducto::route('/create'),
-            'edit' => EditProducto::route('/{record}/edit'),
         ];
     }
 }
