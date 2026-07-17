@@ -2,23 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-
-    // 1. FORZAMOS LA CONEXIÓN Y TU TABLA REAL EN MYSQL
-    protected $connection = 'mysql';
-    protected $table = 'users';
-
-    // 2. CORRECCIÓN: Desactivamos los campos automáticos created_at y updated_at
-    public $timestamps = false;
-
     protected $fillable = [
         'name',
         'email',
@@ -28,36 +16,19 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
-        'remember_token',
     ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
-
-    public function isAdmin(): bool
-    {
-        return $this->role_id === 1;
-    }
-
-    public function isInventory(): bool
-    {
-        return $this->role_id === 1 || $this->role_id === 3;
-    }
-
-    public function isPurchaser(): bool
-    {
-        return $this->role_id === 1 || $this->role_id === 2;
-    }
 
     public function role(): BelongsTo
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(Role::class);
     }
 
-    public function ordenVentas(): HasMany
+    public function tienePermiso(string $permission): bool
     {
-        return $this->hasMany(OrdenVenta::class, 'user_id');
+        if ($this->role && $this->role->permissions) {
+            $permisos = json_decode($this->role->permissions, true);
+            return is_array($permisos) && in_array($permission, $permisos);
+        }
+        return false;
     }
 }

@@ -2,24 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Proveedor extends Model
 {
-    use HasFactory;
-
-    public $timestamps = false;
-
     protected $table = 'proveedores';
+    public $timestamps = false;
+    protected $fillable = ['ruc', 'razon_social', 'contacto'];
 
-    protected $fillable = [
-        'ruc',
-        'razon_social',
-        'contacto',
-    ];
-
-    public function ordenCompras()
+    public function ordenes()
     {
         return $this->hasMany(OrdenCompra::class, 'proveedor_id');
     }

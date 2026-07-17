@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Producto extends Model
 {
-    use HasFactory;
+    protected $table = 'productos';
 
     public $timestamps = false;
 
@@ -17,16 +17,12 @@ class Producto extends Model
         'categoria_id',
         'stock_actual',
         'stock_critico',
-        'precio_venta',
+        'precio_view'
     ];
 
-    public function categoria()
+    // Relación: El producto pertenece a una categoría
+    public function categoria(): BelongsTo
     {
-        return $this->belongsTo(Categoria::class, 'categoria_id');
-    }
-
-    public function detalleVentas()
-    {
-        return $this->hasMany(DetalleVenta::class, 'producto_id');
+        return $this->belongsTo(Category::class, 'categoria_id');
     }
 }
