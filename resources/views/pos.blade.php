@@ -61,21 +61,21 @@
         })
         .catch(() => this.errorMessage = 'No se pudo conectar con el servidor.');
     }
-}" style="max-width: 1400px; margin: 0 auto; padding: 10px;">
+}" class="max-w-7xl mx-auto">
 
     <div class="mb-6">
-        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Punto de Venta</h1>
-        <p class="text-sm text-slate-500 mt-1 font-medium">Generación rápida de órdenes y facturación sincronizada con inventario</p>
+        <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Punto de Venta</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Generación rápida de órdenes y facturación sincronizada con inventario</p>
     </div>
 
     <div x-show="errorMessage" class="bg-red-50 text-red-600 p-4 rounded-xl text-xs font-semibold border border-red-100 mb-6" style="display: none;" x-text="errorMessage"></div>
 
-    <!-- CONTENEDOR CONTROLLADO CON FLEXBOX NATIVO: FORZA LAS 2 COLUMNAS SÍ O SÍ -->
-    <div style="display: flex; gap: 24px; align-items: flex-start; width: 100%;">
+    <!-- CONTENEDOR RESPONSIVE: Stacking en móvil, 2 columnas en desktop -->
+    <div class="flex flex-col lg:flex-row gap-6 items-start w-full">
         
-        <!-- COLUMNA IZQUIERDA: DETALLE DE VENTA (Ancho flexible dominante) -->
-        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6" style="flex: 2; min-width: 0;">
-            <div class="flex items-center justify-between mb-6">
+        <!-- COLUMNA IZQUIERDA: DETALLE DE VENTA -->
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 sm:p-6 w-full lg:flex-1 min-w-0">
+            <div class="flex items-center justify-between mb-4 sm:mb-6">
                 <div class="flex items-center gap-2 text-slate-800 font-bold text-sm">
                     <svg class="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                     Detalle de Venta
@@ -85,13 +85,13 @@
                 </button>
             </div>
 
-            <!-- FILAS ALINEADAS HORIZONTALMENTE MEDIANTE FLEXBOX NATIVO INDEPENDIENTE -->
-            <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- FILAS RESPONSIVE DE PRODUCTOS -->
+            <div class="space-y-3">
                 <template x-for="(linea, index) in lineas" :key="index">
-                    <div class="bg-slate-50/40 p-4 border border-slate-100 rounded-xl" style="display: flex; flex-direction: row; gap: 16px; align-items: flex-end; justify-content: space-between;">
+                    <div class="bg-slate-50/60 p-3 sm:p-4 border border-slate-100 rounded-xl flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-end justify-between">
                         
                         <!-- SELECCIÓN DE PRODUCTO -->
-                        <div style="flex: 3; min-width: 0;">
+                        <div class="flex-1 min-w-0">
                             <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider">Producto</label>
                             <select x-model="linea.id" @change="actualizarPrecio(index)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none font-medium text-slate-700">
                                 <option value="">Seleccione un producto...</option>
@@ -101,23 +101,25 @@
                             </select>
                         </div>
 
-                        <!-- INPUT CANTIDAD -->
-                        <div style="flex: 1; min-width: 80px; max-width: 100px;">
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider text-center">Cant.</label>
-                            <input type="number" x-model.number="linea.cantidad" min="1" class="w-full bg-white border border-slate-200 rounded-lg px-2 py-2 text-xs text-center focus:outline-none font-bold text-slate-700">
-                        </div>
+                        <div class="flex items-end gap-3 w-full sm:w-auto">
+                            <!-- INPUT CANTIDAD -->
+                            <div class="w-20 sm:w-24 shrink-0">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider text-center">Cant.</label>
+                                <input type="number" x-model.number="linea.cantidad" min="1" class="w-full bg-white border border-slate-200 rounded-lg px-2 py-2 text-xs text-center focus:outline-none font-bold text-slate-700">
+                            </div>
 
-                        <!-- MOSTRAR PRECIO UNITARIO -->
-                        <div style="flex: 1; min-width: 110px; max-width: 140px;">
-                            <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider text-center">P. Unitario ($)</label>
-                            <div class="w-full bg-slate-100/50 text-slate-500 border border-slate-100 rounded-lg py-2 text-xs text-center font-mono font-bold" x-text="linea.precio.toFixed(2)"></div>
-                        </div>
+                            <!-- MOSTRAR PRECIO UNITARIO -->
+                            <div class="flex-1 sm:w-28 shrink-0">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider text-center">P. Unitario ($)</label>
+                                <div class="w-full bg-slate-100/70 text-slate-600 border border-slate-200 rounded-lg py-2 text-xs text-center font-mono font-bold" x-text="linea.precio.toFixed(2)"></div>
+                            </div>
 
-                        <!-- ELIMINAR LÍNEA -->
-                        <div style="padding-bottom: 4px;">
-                            <button type="button" @click="removerLinea(index)" class="text-slate-300 hover:text-red-500 transition-all p-1.5 block">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                            </button>
+                            <!-- ELIMINAR LÍNEA -->
+                            <div class="pb-1 shrink-0">
+                                <button type="button" @click="removerLinea(index)" class="text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all p-2 block" title="Eliminar fila">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -125,8 +127,8 @@
             </div>
         </div>
 
-        <!-- COLUMNA DERECHA: CARD RESUMEN DE ORDEN (Fijado de forma rígida a la derecha) -->
-        <div class="bg-[#051c11] text-white rounded-2xl shadow-lg border border-emerald-950" style="width: 340px; min-width: 340px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-between; min-height: 310px;">
+        <!-- COLUMNA DERECHA: CARD RESUMEN DE ORDEN -->
+        <div class="bg-[#051c11] text-white rounded-2xl shadow-lg border border-emerald-950 w-full lg:w-80 lg:min-w-[320px] shrink-0 flex flex-col justify-between">
             <div class="p-6 space-y-5">
                 <div class="flex items-center gap-2 text-slate-300 text-xs font-bold uppercase tracking-wider">
                     <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
@@ -146,12 +148,12 @@
 
                 <div class="flex justify-between items-baseline pt-1">
                     <span class="text-base font-bold text-slate-200">Total</span>
-                    <span class="text-3xl font-black font-mono text-[#10b981]" x-text="'$' + total.toFixed(2)"></span>
+                    <span class="text-2xl sm:text-3xl font-black font-mono text-[#10b981]" x-text="'$' + total.toFixed(2)"></span>
                 </div>
             </div>
 
             <!-- Botón inferior empotrado -->
-            <button @click="procesarVenta()" class="w-full bg-[#2a3447] hover:bg-[#333e56] text-slate-200 font-bold py-4 px-6 text-xs transition-all flex items-center justify-center gap-2 tracking-wider uppercase border-t border-emerald-950 rounded-b-2xl">
+            <button @click="procesarVenta()" class="w-full bg-[#1a3828] hover:bg-[#234b37] text-white font-bold py-4 px-6 text-xs transition-all flex items-center justify-center gap-2 tracking-wider uppercase border-t border-emerald-950/60 rounded-b-2xl">
                 Procesar Pago
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
             </button>

@@ -59,16 +59,16 @@
 
         <div class="space-y-6">
             @foreach($users as $user)
-            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
                 
                 <div class="flex items-center justify-between border-b border-slate-50 pb-3">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-[#051c11] text-white flex items-center justify-center font-bold text-base shadow-sm">
+                    <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#051c11] text-white flex items-center justify-center font-bold text-sm sm:text-base shadow-sm shrink-0">
                             {{ strtoupper(substr($user->name, 0, 2)) }}
                         </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900 leading-tight">{{ $user->name }}</h3>
-                            <p class="text-xs text-slate-400 font-medium mt-0.5">{{ $user->email }}</p>
+                        <div class="min-w-0">
+                            <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-tight truncate">{{ $user->name }}</h3>
+                            <p class="text-xs text-slate-400 font-medium mt-0.5 truncate">{{ $user->email }}</p>
                         </div>
                     </div>
 
@@ -76,14 +76,14 @@
                         <form action="/usuarios/{{ $user->id }}" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar permanentemente a este usuario del sistema?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="p-2 text-slate-400 hover:text-red-600 rounded-xl hover:bg-red-50 transition-all" title="Eliminar Usuario">
+                            <button type="submit" class="p-2 text-slate-400 hover:text-red-600 rounded-xl hover:bg-red-50 transition-all shrink-0" title="Eliminar Usuario">
                                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                 </svg>
                             </button>
                         </form>
                     @else
-                        <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-lg uppercase tracking-wider">
+                        <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded-lg uppercase tracking-wider shrink-0">
                             Tu Cuenta
                         </span>
                     @endif
@@ -93,9 +93,9 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="flex items-center gap-3 text-sm pt-2">
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider w-32">Rol Principal:</span>
-                        <select name="role_id" class="bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] transition-all cursor-pointer">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm pt-2">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider sm:w-32 shrink-0">Rol Principal:</span>
+                        <select name="role_id" class="w-full sm:w-auto bg-slate-50 border border-slate-200 text-slate-800 text-sm font-semibold rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] transition-all cursor-pointer">
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
                                     {{ $role->nombre_rol }}
@@ -108,30 +108,30 @@
                         $userPerms = json_decode($user->role->permissions, true) ?? [];
                     @endphp
                     <div class="pt-4 border-t border-slate-50 mt-4">
-                        <div class="flex justify-between items-center mb-3">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                             <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Permisos Granulares Actuales</h4>
-                            <button type="submit" class="bg-slate-100 hover:bg-[#051c11] hover:text-white text-slate-700 font-bold py-1 px-3 rounded-lg text-[11px] transition-all">
+                            <button type="submit" class="self-start sm:self-auto bg-slate-100 hover:bg-[#051c11] hover:text-white text-slate-700 font-bold py-1.5 px-3 rounded-lg text-xs transition-all">
                                 Guardar Cambios de Acceso
                             </button>
                         </div>
                         
-                        <div class="flex flex-wrap gap-x-6 gap-y-2">
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="ver_inventario" {{ in_array('ver_inventario', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Ver Inventario
                             </label>
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="editar_inventario" {{ in_array('editar_inventario', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Editar Inventario
                             </label>
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="gestionar_compras" {{ in_array('gestionar_compras', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Gestionar Compras
                             </label>
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="ver_reportes" {{ in_array('ver_reportes', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Ver Reportes
                             </label>
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="procesar_ventas" {{ in_array('procesar_ventas', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Procesar Ventas
                             </label>
-                            <label class="flex items-center gap-2 text-sm text-slate-700 font-medium cursor-pointer">
+                            <label class="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium cursor-pointer bg-slate-50/50 p-2 rounded-lg border border-slate-100/80">
                                 <input type="checkbox" name="permissions[]" value="gestionar_usuarios" {{ in_array('gestionar_usuarios', $userPerms) ? 'checked' : '' }} class="rounded border-slate-300 text-[#051c11] focus:ring-[#051c11]/20 w-4 h-4 transition-all"> Gestionar Usuarios
                             </label>
                         </div>

@@ -14,37 +14,37 @@
     items: [{ producto_id: '', cantidad: 1, precio_unitario: 0.00 }]
 }">
 
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
         <div>
-            <h1 class="text-2xl font-black text-slate-900 tracking-tight">Órdenes de Compra</h1>
-            <p class="text-sm text-slate-500 mt-1 font-medium">Gestión de reabastecimiento y proveedores</p>
+            <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Órdenes de Compra</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Gestión de reabastecimiento y proveedores</p>
         </div>
         
-        <div class="flex items-center gap-3">
-            <div class="relative w-72">
-                <svg class="absolute left-3 top-2.5 h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div class="relative w-full sm:w-60 lg:w-72">
+                <svg class="absolute left-3 top-2.5 h-4 w-4 sm:h-5 sm:w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input 
                     type="text" 
                     x-model="search"
                     placeholder="Buscar Orden o Proveedor..." 
-                    class="w-full bg-white border border-slate-200 pl-10 pr-4 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] placeholder-slate-400 transition-all"
+                    class="w-full bg-white border border-slate-200 pl-9 sm:pl-10 pr-4 py-2 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] placeholder-slate-400 transition-all"
                 >
             </div>
 
-            <button @click="openProvModal = true" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold py-2.5 px-4 rounded-xl text-sm flex items-center gap-2 transition-all shadow-sm">
+            <button @click="openProvModal = true" class="flex-1 sm:flex-none justify-center bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
-                + Proveedor
+                <span class="truncate">+ Proveedor</span>
             </button>
 
-            <button @click="openAddModal = true" class="bg-[#051c11] hover:bg-[#0c2a1c] text-white font-bold py-2.5 px-4 rounded-xl text-sm flex items-center gap-2 transition-all shadow-sm">
+            <button @click="openAddModal = true" class="flex-1 sm:flex-none justify-center bg-[#051c11] hover:bg-[#0c2a1c] text-white font-bold py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                Nueva Orden
+                <span class="truncate">Nueva Orden</span>
             </button>
         </div>
     </div>

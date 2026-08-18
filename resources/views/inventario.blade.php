@@ -21,44 +21,44 @@
     }
 }">
 
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
         <div>
-            <h1 class="text-2xl font-black text-slate-900 tracking-tight">Inventario Automatizado</h1>
-            <p class="text-sm text-slate-500 mt-1 font-medium">Gestión de activos, repuestos y control de stock</p>
+            <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Inventario Automatizado</h1>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Gestión de activos, repuestos y control de stock</p>
         </div>
         
-        <div class="flex items-center gap-3">
-            <div class="relative w-72">
-                <svg class="absolute left-3 top-2.5 h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <div class="relative w-full sm:w-60 lg:w-72">
+                <svg class="absolute left-3 top-2.5 h-4 w-4 sm:h-5 sm:w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input 
                     type="text" 
                     x-model="search"
                     placeholder="Buscar SKU o Nombre..." 
-                    class="w-full bg-white border border-slate-200 pl-10 pr-4 py-2 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] placeholder-slate-400 transition-all"
+                    class="w-full bg-white border border-slate-200 pl-9 sm:pl-10 pr-4 py-2 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] placeholder-slate-400 transition-all"
                 >
             </div>
 
-            <button @click="openReportModal = true" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold py-2.5 px-4 rounded-xl text-sm flex items-center gap-2 transition-all shadow-sm">
+            <button @click="openReportModal = true" class="flex-1 sm:flex-none justify-center bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2m32-2a4 4 0 00-4-4h-1a4 4 0 00-4 4v2m0-10a4 4 0 11-8 0 4 4 0 018 0zM12 14a3 3 0 100-6 3 3 0 000 6zm-7 6h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v9a2 2 0 002 2z" />
                 </svg>
-                Generar Reporte
+                <span class="truncate">Reporte</span>
             </button>
 
-            <button @click="openAddModal = true" class="bg-[#051c11] hover:bg-[#0c2a1c] text-white font-bold py-2.5 px-4 rounded-xl text-sm flex items-center gap-2 transition-all shadow-sm">
+            <button @click="openAddModal = true" class="flex-1 sm:flex-none justify-center bg-[#051c11] hover:bg-[#0c2a1c] text-white font-bold py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl text-xs sm:text-sm flex items-center gap-2 transition-all shadow-sm">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
-                Añadir Producto
+                <span class="truncate">Añadir</span>
             </button>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-red-50/50 border border-red-100 rounded-2xl p-5 flex items-start gap-4 shadow-sm">
-            <div class="p-3 bg-red-100/60 text-red-600 rounded-xl">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div class="bg-red-50/50 border border-red-100 rounded-2xl p-4 sm:p-5 flex items-start gap-4 shadow-sm">
+            <div class="p-3 bg-red-100/60 text-red-600 rounded-xl shrink-0">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
@@ -69,8 +69,8 @@
             </div>
         </div>
 
-        <div class="bg-amber-50/50 border border-amber-100 rounded-2xl p-5 flex items-start gap-4 shadow-sm">
-            <div class="p-3 bg-amber-100/60 text-amber-600 rounded-xl">
+        <div class="bg-amber-50/50 border border-amber-100 rounded-2xl p-4 sm:p-5 flex items-start gap-4 shadow-sm">
+            <div class="p-3 bg-amber-100/60 text-amber-600 rounded-xl shrink-0">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -172,20 +172,20 @@
         </div>
     </div>
 
-    <!-- MODAL CREAR NUEVO PRODUCTO -->
+    <!-- MODAL AÑADIR PRODUCTO -->
     <div x-show="openAddModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition style="display: none;">
-        <div class="bg-white w-full max-w-[500px] rounded-[1.5rem] p-8 shadow-2xl relative" @click.away="openAddModal = false">
+        <div class="bg-white w-full max-w-[520px] rounded-[1.5rem] p-5 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto" @click.away="openAddModal = false">
             <button @click="openAddModal = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition-all focus:outline-none">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
             <div class="mb-6">
-                <h3 class="text-lg font-black text-slate-900 tracking-tight">Crear Nuevo Producto</h3>
+                <h3 class="text-lg font-black text-slate-900 tracking-tight">Añadir Nuevo Producto</h3>
             </div>
             <form action="{{ route('inventario.store') }}" method="POST" class="space-y-4">
                 @csrf
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-2">SKU</label>
                         <input type="text" name="sku" value="{{ old('sku') }}" placeholder="PRT-000" class="w-full bg-slate-50/60 border @error('sku') border-red-400 focus:ring-red-100 @else border-slate-200 focus:ring-[#051c11]/10 @enderror rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:border-[#051c11] transition-all">
@@ -205,7 +205,7 @@
                     <input type="text" name="nombre" value="{{ old('nombre') }}" placeholder="Descripción detallada" class="w-full bg-slate-50/60 border @error('nombre') border-red-400 focus:ring-red-100 @else border-slate-200 focus:ring-[#051c11]/10 @enderror rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:border-[#051c11] transition-all">
                     @error('nombre') <p class="text-red-500 text-[11px] font-semibold mt-1">{{ $message }}</p> @enderror
                 </div>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-2">Stock Inicial</label>
                         <input type="number" name="stock_actual" value="{{ old('stock_actual', 0) }}" class="w-full bg-slate-50/60 border @error('stock_actual') border-red-400 focus:ring-red-100 @else border-slate-200 focus:ring-[#051c11]/10 @enderror rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:border-[#051c11] transition-all">
@@ -232,7 +232,7 @@
 
     <!-- MODAL EDITAR PRODUCTO -->
     <div x-show="openEditModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" x-transition style="display: none;">
-        <div class="bg-white w-full max-w-[500px] rounded-[1.5rem] p-8 shadow-2xl relative" @click.away="openEditModal = false">
+        <div class="bg-white w-full max-w-[520px] rounded-[1.5rem] p-5 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto" @click.away="openEditModal = false">
             <button @click="openEditModal = false" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition-all focus:outline-none">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -245,7 +245,7 @@
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="id" x-model="editProduct.id">
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-2">SKU</label>
                         <input type="text" name="sku" required x-model="editProduct.sku" class="w-full bg-slate-50/60 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] transition-all">
@@ -265,7 +265,7 @@
                     <input type="text" name="nombre" required x-model="editProduct.nombre" class="w-full bg-slate-50/60 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] transition-all">
                     @error('nombre') <p class="text-red-500 text-[11px] font-semibold mt-1">{{ $message }}</p> @enderror
                 </div>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                     <div>
                         <label class="block text-xs font-bold text-slate-700 mb-2">Stock Actual</label>
                         <input type="number" name="stock_actual" required x-model="editProduct.stock_actual" class="w-full bg-slate-50/60 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#051c11]/10 focus:border-[#051c11] transition-all">

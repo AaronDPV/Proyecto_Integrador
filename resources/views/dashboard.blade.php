@@ -7,16 +7,16 @@
 @endpush
 
 @section('content')
-    <div class="mb-8">
-        <h1 class="text-2xl font-black text-slate-900 tracking-tight">Escritorio Principal</h1>
-        <p class="text-sm text-slate-500 mt-1 font-medium">Resumen de indicadores clave de rendimiento (KPIs)</p>
+    <div class="mb-6 sm:mb-8">
+        <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Escritorio Principal</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Resumen de indicadores clave de rendimiento (KPIs)</p>
     </div>
 
     <!-- REJILLA DE CARDS DE INDICADORES REALES -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
         
         <!-- INDICADOR 1: VENTAS TOTALES -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
             <div class="flex justify-between items-start">
                 <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -29,12 +29,12 @@
             </div>
             <div class="mt-4">
                 <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Ventas Totales</span>
-                <span class="text-2xl font-black text-slate-900 block mt-1">${{ number_format($ventasTotales, 2) }}</span>
+                <span class="text-xl sm:text-2xl font-black text-slate-900 block mt-1">${{ number_format($ventasTotales, 2) }}</span>
             </div>
         </div>
 
         <!-- INDICADOR 2: UNIDADES PROCESADAS -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
             <div class="flex justify-between items-start">
                 <div class="p-3 bg-blue-50 text-blue-500 rounded-xl">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -47,12 +47,12 @@
             </div>
             <div class="mt-4">
                 <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Unidades Vendidas</span>
-                <span class="text-2xl font-black text-slate-900 block mt-1">{{ number_format($unidadesVendidas) }} u.</span>
+                <span class="text-xl sm:text-2xl font-black text-slate-900 block mt-1">{{ number_format($unidadesVendidas) }} u.</span>
             </div>
         </div>
 
         <!-- INDICADOR 3: ÓRDENES REALIZADAS -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
             <div class="flex justify-between items-start">
                 <div class="p-3 bg-indigo-50 text-indigo-500 rounded-xl">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -65,12 +65,12 @@
             </div>
             <div class="mt-4">
                 <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Boletas Emitidas</span>
-                <span class="text-2xl font-black text-slate-900 block mt-1">{{ number_format($ordenesProcesadas) }}</span>
+                <span class="text-xl sm:text-2xl font-black text-slate-900 block mt-1">{{ number_format($ordenesProcesadas) }}</span>
             </div>
         </div>
 
         <!-- INDICADOR 4: STOCK ALERTA CRÍTICA -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between">
             <div class="flex justify-between items-start">
                 <div class="p-3 {{ $stockBajo > 0 ? 'bg-red-50 text-red-500' : 'bg-slate-50 text-slate-400' }} rounded-xl">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -83,16 +83,16 @@
             </div>
             <div class="mt-4">
                 <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">Stock Crítico</span>
-                <span class="text-2xl font-black {{ $stockBajo > 0 ? 'text-red-600' : 'text-slate-900' }} block mt-1">{{ $stockBajo }}</span>
+                <span class="text-xl sm:text-2xl font-black {{ $stockBajo > 0 ? 'text-red-600' : 'text-slate-900' }} block mt-1">{{ $stockBajo }}</span>
             </div>
         </div>
     </div>
 
     <!-- SECCIÓN DE GRÁFICOS DIARIOS ASOCIADOS A VENTAS -->
-    <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
-        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-            <h3 class="text-lg font-bold text-slate-900 mb-4 tracking-tight">Evolución de Ingresos Monetarios Diarios</h3>
-            <div class="h-80">
+    <div class="grid grid-cols-1 gap-8">
+        <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-100 shadow-sm">
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-4 tracking-tight">Evolución de Ingresos Monetarios Diarios</h3>
+            <div class="h-64 sm:h-80">
                 <canvas id="chartVentasReales"></canvas>
             </div>
         </div>
